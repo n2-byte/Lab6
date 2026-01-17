@@ -31,3 +31,28 @@ if not id.isdigit() or id.startswith("0") or int(id) <= 0:
 if property not in ["artist", "albumTitle", "tracks"]:
     print("Invalid")
     quit()
+    
+def update_records(dictionary_record, id, property, value):
+    # create new id
+    if id not in dictionary_record:
+        dictionary_record[id] = {}
+    # delete
+    if value == "":
+        if property in dictionary_record[id]:
+            del dictionary_record[id][property]
+            return dictionary_record
+        else:
+            return "Invalid"
+    # add
+    if property != "tracks":
+        dictionary_record[id][property] = value
+        return dictionary_record
+    # tracks
+    if "tracks" not in dictionary_record[id]:
+        dictionary_record[id]["tracks"] = []
+
+    dictionary_record[id]["tracks"].append(value)
+
+    return dictionary_record
+
+print(update_records(dictionary_record, id, property, value))
